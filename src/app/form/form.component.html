@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="card my-5 bg-light">
+        <div class="row">
+
+            <div class="card-body">
+
+                <form style="width: 50%; margin: 0px auto 0px auto ;" [formGroup]="formpage" (ngSubmit)="submit()" >
+                    <div class="mb-3">
+                        <label for="id" class="form-label">Id</label>
+                        <input type="number" class="form-control" id="id" formControlName="id" [(ngModel)]="obj.id"
+                             />
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="name" formControlName="name" [(ngModel)]="obj.name"
+                            [ngClass]="{ 'is-invalid': Submitted && f['name'].errors || f['name'].touched&& f['name'].errors }" />
+                        <div *ngIf="Submitted && f['name'].errors|| f['name'].touched&& f['name'].errors"
+                            class="invalid-feedback">
+                            <div *ngIf="f['name'].errors['required']"><span style="color: red;">*First Name is required
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" class="form-control" id="age" formControlName="age" [(ngModel)]="obj.age"
+                            [ngClass]="{ 'is-invalid': Submitted && f['age'].errors || f['age'].touched&& f['age'].errors }" />
+                        <div *ngIf="Submitted && f['age'].errors|| f['age'].touched&& f['age'].errors"
+                            class="invalid-feedback">
+                            <div *ngIf="f['age'].errors['required']"><span style="color: red;">*Age is required </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" formControlName="status" [(ngModel)]="obj.status"
+                            [ngClass]="{ 'is-invalid': Submitted && f['status'].errors || f['status'].touched&& f['status'].errors }">
+                            <option selected>Open this select menu</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                        <div *ngIf="Submitted && f['status'].errors|| f['status'].touched&& f['status'].errors"
+                            class="invalid-feedback">
+                            <div *ngIf="f['status'].errors['required']"><span style="color: red;">*Status is required
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Gender</label>
+                        <div class="form-check" 
+                            [ngClass]="{ 'is-invalid': Submitted && f['gender'].errors || f['gender'].touched&& f['gender'].errors }">
+                            <input type="radio" formControlName="gender" [(ngModel)]="obj.gender" value="male" id="male"> <span> Male</span><br>
+
+                            <input type="radio" formControlName="gender" [(ngModel)]="obj.gender" value="female" id="female"> <span>
+                                Female</span><br>
+
+                            <input type="radio" formControlName="gender" [(ngModel)]="obj.gender" value="others" id="others"> <span>
+                                Others</span>
+                        </div>
+                        <div *ngIf="Submitted && f['gender'].errors|| f['gender'].touched&& f['gender'].errors"
+                            class="invalid-feedback">
+                            <div *ngIf="f['gender'].errors['required']"><span style="color: red;">*gender is required
+                                </span>
+                            </div>
+                        </div>
+                    </div> 
+                    
+                        
+                        <div *ngFor="let d of all"  >
+                            <input type="checkbox" formArrayName="language"  (change)="checkValue(d.name,$event)" [ngClass]="{ 'is-invalid': Submitted && f['language'].errors || f['language'].touched&& f['language'].errors }"> {{ d.name }}
+                            <div *ngIf="Submitted && f['language'].errors|| f['language'].touched&& f['language'].errors"
+                            class="invalid-feedback">
+                            <div *ngIf="f['language'].errors['required']"><span style="color: red;">*Language is required
+                                </span>
+                            </div>
+                        </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
